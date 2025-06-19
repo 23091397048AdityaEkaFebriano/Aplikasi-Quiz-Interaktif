@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Management System</title>
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background: linear-gradient(-45deg, #007bff, #0056b3, #00c6ff, #0056b3);
+            background-size: 400% 400%;
+            animation: gradientMove 12s ease-in-out infinite;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        @keyframes gradientMove {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeInUp 1.2s forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+        .navbar {
+            background: transparent;
+        }
+        .landing-hero {
+            color: #fff;
+            text-align: center;
+            padding: 90px 20px 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .landing-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+            animation-delay: 0.2s;
+        }
+        .landing-hero p {
+            font-size: 1.25rem;
+            margin-bottom: 32px;
+            color: #e0e0e0;
+            animation-delay: 0.4s;
+        }
+        .landing-btn-group .btn {
+            min-width: 160px;
+            margin: 0 10px 10px 10px;
+            padding: 12px 0;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        }
+        .landing-btn-group .btn:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.13);
+        }
+        .landing-img {
+            width: 100%;
+            max-width: 520px;
+            margin: 48px auto 0 auto;
+            display: block;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            animation: fadeInUp 1.2s 0.6s forwards;
+            opacity: 0;
+        }
+        /* Section Keunggulan */
+        .features-section {
+            background: #fff;
+            border-radius: 24px;
+            margin: 60px auto 0 auto;
+            max-width: 1000px;
+            padding: 48px 24px 40px 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+        }
+        .features-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px;
+        }
+        .feature-card {
+            background: #f8f9fa;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 32px 22px;
+            max-width: 260px;
+            flex: 1 1 220px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.04);
+            box-shadow: 0 8px 24px rgba(0,123,255,0.09);
+        }
+        .feature-card i {
+            font-size: 2.2rem;
+            color: #007bff;
+            margin-bottom: 14px;
+            animation: bounce 1.5s infinite alternate;
+        }
+        @keyframes bounce {
+            to { transform: translateY(-8px);}
+        }
+        .feature-card h4 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            font-size: 0.98rem;
+            color: #555;
+        }
+        /* Galeri Mobil */
+        .gallery-section {
+            margin: 60px auto 0 auto;
+            max-width: 1100px;
+            padding: 0 10px;
+        }
+        .gallery-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        .gallery-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            justify-content: center;
+        }
+        .gallery-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            width: 260px;
+            transition: transform 0.22s, box-shadow 0.22s;
+            cursor: pointer;
+            position: relative;
+        }
+        .gallery-card:hover {
+            transform: translateY(-10px) scale(1.04);
+            box-shadow: 0 10px 32px rgba(0,123,255,0.13);
+        }
+        .gallery-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            transition: filter 0.22s;
+        }
+        .gallery-card:hover img {
+            filter: brightness(0.92) blur(1px);
+        }
+        .gallery-card .gallery-info {
+            padding: 18px 16px 14px 16px;
+        }
+        .gallery-card .gallery-info h5 {
+            font-size: 1.08rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .gallery-card .gallery-info p {
+            font-size: 0.97rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+        /* Testimoni */
+        .testimoni-section {
+            background: #f8f9fa;
+            border-radius: 24px;
+            margin: 60px auto 0 auto;
+            max-width: 900px;
+            padding: 44px 24px 36px 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+        }
+        .testimoni-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #007bff;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        .testimoni-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 28px;
+            justify-content: center;
+        }
+        .testimoni-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 28px 22px;
+            max-width: 320px;
+            flex: 1 1 220px;
+            text-align: left;
+            position: relative;
+            transition: box-shadow 0.2s;
+        }
+        .testimoni-card:hover {
+            box-shadow: 0 8px 24px rgba(0,123,255,0.09);
+        }
+        .testimoni-card .fa-quote-left {
+            color: #007bff;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        .testimoni-card .testimoni-text {
+            font-size: 1.02rem;
+            color: #444;
+            margin-bottom: 14px;
+        }
+        .testimoni-card .testimoni-user {
+            font-weight: 600;
+            color: #007bff;
+            font-size: 1rem;
+        }
+        .testimoni-card .testimoni-role {
+            font-size: 0.92rem;
+            color: #888;
+        }
+        /* Footer */
+        .footer {
+            background: linear-gradient(90deg, #0056b3 60%, #007bff 100%);
+            color: #fff;
+            border-radius: 0;
+            margin-bottom: 0;
+            padding: 30px 0 10px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+        .social-link {
+            transition: opacity 0.2s;
+        }
+        .social-link:hover {
+            opacity: 0.7;
+        }
+        .footer .social-link i {
+            color: #fff !important;
+            transition: color 0.2s;
+        }
+        .footer .social-link:hover i {
+            color: #ffd600 !important;
+        }
+        @media (max-width: 992px) {
+            .features-list, .testimoni-list, .gallery-list {
+                flex-direction: column;
+                gap: 18px;
+            }
+            .features-section, .testimoni-section {
+                padding: 24px 8px 18px 8px;
+            }
+            .gallery-section {
+                padding: 0 2px;
+            }
+        }
+        @media (max-width: 600px) {
+            .landing-hero h1, .features-title, .gallery-title, .testimoni-title {
+                font-size: 1.3rem;
+            }
+            .landing-img {
+                max-width: 98vw;
+            }
+        }
+        .btn-light.text-primary.border-primary:hover {
+            background: #007bff !important;
+            color: #fff !important;
+            border-color: #007bff !important;
+            box-shadow: 0 4px 16px rgba(0,123,255,0.13);
+            transition: all 0.2s;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Car Rental</a>
+            <div class="ms-auto">
+                <a href="/car-rental-management/src/views/login.php" class="btn btn-outline-light me-2">Login</a>
+                <a href="/car-rental-management/src/views/register.php" class="btn btn-light text-primary">Register</a>
+            </div>
+        </div>
+    </nav>
+    <div class="landing-hero fade-in">
+        <h1>Selamat Datang di Car Rental Management System</h1>
+        <p>Solusi sewa mobil online yang mudah, cepat, dan terpercaya.<br>
+        Temukan mobil impian Anda untuk perjalanan bisnis, liburan, atau kebutuhan harian.</p>
+      
+        <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=800&q=80" alt="Car Rental" class="landing-img">
+    </div>
+    <!-- Section Keunggulan -->
+    <section class="features-section fade-in" style="animation-delay:0.3s;">
+        <div class="features-title">Kenapa Pilih Kami?</div>
+        <div class="features-list">
+            <div class="feature-card">
+                <i class="fas fa-car"></i>
+                <h4>Pilihan Mobil Lengkap</h4>
+                <p>Berbagai tipe mobil tersedia, mulai dari city car, SUV, hingga premium. Semua mobil dalam kondisi prima dan siap jalan.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-clock"></i>
+                <h4>Proses Cepat & Mudah</h4>
+                <p>Pemesanan dan pembayaran online, tanpa ribet dan transparan. Cukup beberapa klik, mobil siap diantar!</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h4>Keamanan & Kenyamanan</h4>
+                <p>Mobil terawat, asuransi lengkap, dan layanan pelanggan responsif 24 jam untuk kenyamanan Anda.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-map-marker-alt"></i>
+                <h4>Jangkauan Luas</h4>
+                <p>Layanan kami tersedia di berbagai kota besar di Indonesia. Dimanapun Anda, kami siap melayani.</p>
+            </div>
+        </div>
+    </section>
+    <!-- Section Galeri Mobil -->
+    <section class="gallery-section fade-in" style="animation-delay:0.5s;">
+        <div class="gallery-title">Galeri Mobil Populer</div>
+        <div class="gallery-list">
+            <div class="gallery-card">
+                <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a?auto=format&fit=crop&w=400&q=80" alt="Toyota Fortuner">
+                <div class="gallery-info">
+                    <h5>Toyota Fortuner</h5>
+                    <p>SUV Tangguh & Nyaman</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <!-- Honda Jazz: city car hatchback -->
+                <img src="https://images.unsplash.com/photo-1609676671207-d021525a635d?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8SG9uZGElMjBKYXp6fGVufDB8fDB8fHww" alt="Honda Jazz">
+                <div class="gallery-info">
+                    <h5>Honda Jazz</h5>
+                    <p>City Car Irit & Stylish</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <!-- Mercedes-Benz E-Class: sedan luxury -->
+                <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=400&q=80" alt="Mercedes-Benz E-Class">
+                <div class="gallery-info">
+                    <h5>Mercedes-Benz E-Class</h5>
+                    <p>Luxury Sedan Premium</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <!-- Daihatsu Xenia: MPV keluarga -->
+                <img src="https://images.unsplash.com/photo-1707573145474-8b8e40bb09ba?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fERhaWhhdHN1JTIwWGVuaWF8ZW58MHx8MHx8fDA%3D" alt="Daihatsu Xenia">
+                <div class="gallery-info">
+                    <h5>Daihatsu Xenia</h5>
+                    <p>MPV Keluarga Favorit</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Section Testimoni -->
+    <section class="testimoni-section fade-in" style="animation-delay:0.7s;">
+        <div class="testimoni-title">Apa Kata Pelanggan Kami?</div>
+        <div class="testimoni-list">
+            <div class="testimoni-card">
+                <i class="fas fa-quote-left"></i>
+                <div class="testimoni-text">"Pelayanan sangat ramah, mobil bersih dan nyaman. Proses booking sangat mudah dan cepat!"</div>
+                <div class="testimoni-user">Rizky Saputra</div>
+                <div class="testimoni-role">Pelanggan</div>
+            </div>
+            <div class="testimoni-card">
+                <i class="fas fa-quote-left"></i>
+                <div class="testimoni-text">"Saya suka pilihan mobilnya banyak dan semua dalam kondisi bagus. Harga juga bersaing."</div>
+                <div class="testimoni-user">Dewi Lestari</div>
+                <div class="testimoni-role">Penyewa</div>
+            </div>
+            <div class="testimoni-card">
+                <i class="fas fa-quote-left"></i>
+                <div class="testimoni-text">"Sangat membantu saat perjalanan dinas. Support 24 jam benar-benar responsif!"</div>
+                <div class="testimoni-user">Andi Pratama</div>
+                <div class="testimoni-role">Pelanggan</div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <div>
+                <strong>Alamat:</strong> Jl. Raya Rental Mobil No. 123, Jakarta &nbsp; | &nbsp;
+                <strong>WhatsApp:</strong> <a href="https://wa.me/6281234567890" class="text-white" target="_blank">+62 812-3456-7890</a> &nbsp; | &nbsp;
+                <strong>Email:</strong> <span class="text-white">info@rentalmobil.com</span>
+            </div>
+            <div class="mt-2">
+                <a href="https://instagram.com/yourrental" class="social-link" target="_blank" style="margin:0 10px;">
+                    <i class="fab fa-instagram fa-lg"></i>
+                </a>
+                <a href="https://twitter.com/yourrental" class="social-link" target="_blank" style="margin:0 10px;">
+                    <i class="fab fa-twitter fa-lg"></i>
+                </a>
+                <a href="https://facebook.com/yourrental" class="social-link" target="_blank" style="margin:0 10px;">
+                    <i class="fab fa-facebook fa-lg"></i>
+                </a>
+            </div>
+            <div class="mt-3" style="color:#e0e0e0;">Kelompok 1 | Astrid | Aditya | Naila | Senza</div>
+        </div>
+    </footer>
+    <script>
+        // Fade-in animasi untuk setiap section
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.fade-in').forEach(function(el, i) {
+                setTimeout(function() {
+                    el.style.opacity = 1;
+                    el.style.transform = "none";
+                }, 200 + i * 200);
+            });
+        });
+    </script>
+</body>
+</html>
